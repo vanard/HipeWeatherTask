@@ -1,4 +1,4 @@
-package com.vanard.hipeweathertask.data.model
+package com.vanard.hipeweathertask.data.model.hourly
 
 
 import com.google.gson.annotations.SerializedName

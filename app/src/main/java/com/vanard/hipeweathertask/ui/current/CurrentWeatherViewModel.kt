@@ -1,13 +1,17 @@
 package com.vanard.hipeweathertask.ui.current
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.vanard.hipeweathertask.data.repository.WeatherRepository
+import com.vanard.hipeweathertask.utils.lazyDeferred
 
-class CurrentWeatherViewModel : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+class CurrentWeatherViewModel(
+    private val weatherRepository: WeatherRepository
+) : ViewModel() {
+    val weather by lazyDeferred {
+        weatherRepository.getCurrentWeather()
     }
-    val text: LiveData<String> = _text
+
+    val hourlyWeather by lazyDeferred {
+        weatherRepository.getFutureHourlyWeather()
+    }
 }

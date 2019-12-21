@@ -3,11 +3,14 @@ package com.vanard.hipeweathertask.ui.future
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.vanard.hipeweathertask.data.repository.WeatherRepository
+import com.vanard.hipeweathertask.utils.lazyDeferred
 
-class FutureWeatherViewModel : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+class FutureWeatherViewModel(
+    private val weatherRepository: WeatherRepository
+) : ViewModel() {
+    val weather by lazyDeferred {
+        weatherRepository.getFutureDailyWeather()
     }
-    val text: LiveData<String> = _text
+
 }

@@ -1,4 +1,4 @@
-package com.vanard.hipetask.network
+package com.vanard.hipeweathertask.network
 
 import okhttp3.Interceptor
 

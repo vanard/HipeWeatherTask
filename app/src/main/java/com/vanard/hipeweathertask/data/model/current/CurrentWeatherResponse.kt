@@ -1,7 +1,5 @@
-package com.vanard.hipeweathertask.data.model
+package com.vanard.hipeweathertask.data.model.current
 
-
-import com.google.gson.annotations.SerializedName
 
 data class CurrentWeatherResponse(
     val coord: Coord,

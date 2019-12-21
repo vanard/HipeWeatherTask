@@ -1,13 +1,24 @@
 package com.vanard.hipeweathertask.data.repository
 
-import androidx.lifecycle.LiveData
-import com.vanard.hipeweathertask.data.model.CurrentWeatherResponse
-import com.vanard.hipeweathertask.network.WeatherNetworkDataSource
+import com.vanard.hipeweathertask.data.model.current.CurrentWeatherResponse
+import com.vanard.hipeweathertask.data.model.daily.FutureDailyWeatherResponse
+import com.vanard.hipeweathertask.data.model.hourly.FutureHourlyWeatherResponse
+import com.vanard.hipeweathertask.network.ApiService
+import io.reactivex.Observable
 
 class WeatherRepositoryImpl(
-    private val weatherNetworkDataSource: WeatherNetworkDataSource
+    private val apiService: ApiService
 ) : WeatherRepository {
-    override suspend fun getCurrentWeather(): LiveData<CurrentWeatherResponse> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override suspend fun getCurrentWeather(): Observable<CurrentWeatherResponse> {
+        return apiService.getCurrentWeather(query = "bandung")
+
+    }
+
+    override suspend fun getFutureDailyWeather(): Observable<FutureDailyWeatherResponse> {
+        return apiService.getDailyWeather(query = "bandung")
+    }
+
+    override suspend fun getFutureHourlyWeather(): Observable<FutureHourlyWeatherResponse> {
+        return apiService.getHourlyWeather(query = "bandung")
     }
 }

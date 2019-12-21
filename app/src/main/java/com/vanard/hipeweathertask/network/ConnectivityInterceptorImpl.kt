@@ -1,8 +1,8 @@
-package com.vanard.hipetask.network
+package com.vanard.hipeweathertask.network
 
 import android.content.Context
 import android.net.ConnectivityManager
-import com.vanard.hipetask.utils.NoConnectivityException
+import com.vanard.hipeweathertask.utils.NoConnectivityException
 import okhttp3.Interceptor
 import okhttp3.Response
 
