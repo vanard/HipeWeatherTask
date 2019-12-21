@@ -3,21 +3,22 @@
     android:orientation="vertical" android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="4dp" android:layout_margin="8dp"
+    android:background="@drawable/border_rounded"
     >
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/weather_item_temp"
+        android:id="@+id/future_day"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/weather_item_icon"
+        android:id="@+id/future_icon"
         android:layout_width="48dp"
         android:layout_height="48dp" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/weather_item_hour"
+        android:id="@+id/future_temp"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

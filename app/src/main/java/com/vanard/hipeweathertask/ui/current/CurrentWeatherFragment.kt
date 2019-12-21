@@ -12,10 +12,13 @@ import com.vanard.hipeweathertask.R
 import com.vanard.hipeweathertask.data.model.current.CurrentWeatherResponse
 import com.vanard.hipeweathertask.data.model.hourly.FutureHourlyWeatherResponse
 import com.vanard.hipeweathertask.network.BASE_IMAGE_URL
+import com.vanard.hipeweathertask.ui.future.FutureDailyWeatherItem
+import com.vanard.hipeweathertask.utils.SetUpLayoutManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_current_weather.*
+import kotlinx.android.synthetic.main.fragment_future_weather.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -29,6 +32,7 @@ class CurrentWeatherFragment : Fragment(), KodeinAware {
     private val viewModelFactory: CurrentWeatherViewModelFactory by instance()
 
     private lateinit var currentWeatherViewModel: CurrentWeatherViewModel
+    private lateinit var mWeatherAdapter: CurrentWeatherItem
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +47,7 @@ class CurrentWeatherFragment : Fragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initRecyclerView()
         bindUI()
     }
 
@@ -65,6 +70,7 @@ class CurrentWeatherFragment : Fragment(), KodeinAware {
         return object : DisposableObserver<FutureHourlyWeatherResponse>() {
             override fun onNext(hourlyWeatherResponse: FutureHourlyWeatherResponse) {
                 //
+                mWeatherAdapter.addItems(hourlyWeatherResponse.list)
             }
 
             override fun onError(e: Throwable) {
@@ -116,6 +122,12 @@ class CurrentWeatherFragment : Fragment(), KodeinAware {
             override fun onComplete() {
             }
         }
+    }
+
+    private fun initRecyclerView() {
+        SetUpLayoutManager.horizontalLinearLayout(requireContext(), rv_current_weather)
+        mWeatherAdapter = CurrentWeatherItem()
+        rv_current_weather.adapter = mWeatherAdapter
     }
 
 

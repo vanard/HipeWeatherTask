@@ -1,7 +1,5 @@
 package com.vanard.hipeweathertask.ui.future
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vanard.hipeweathertask.data.repository.WeatherRepository
 import com.vanard.hipeweathertask.utils.lazyDeferred

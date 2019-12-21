@@ -9,11 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.vanard.hipeweathertask.R
 import com.vanard.hipeweathertask.data.model.daily.FutureDailyWeatherResponse
-import com.vanard.hipeweathertask.data.model.hourly.FutureHourlyWeatherResponse
-import com.vanard.hipeweathertask.ui.current.CurrentWeatherViewModelFactory
+import com.vanard.hipeweathertask.data.model.daily.X
+import com.vanard.hipeweathertask.utils.SetUpLayoutManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.fragment_future_weather.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -23,9 +24,11 @@ import org.kodein.di.generic.instance
 class FutureWeatherFragment : Fragment(), KodeinAware {
 
     override val kodein by closestKodein()
-    private val viewModelFactory: CurrentWeatherViewModelFactory by instance()
+    private val viewModelFactory: FutureWeatherViewModelFactory by instance()
 
     private lateinit var futureWeatherViewModel: FutureWeatherViewModel
+    private lateinit var mWeatherAdapter: FutureDailyWeatherItem
+    private val mWeatherList = ArrayList<X>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +43,7 @@ class FutureWeatherFragment : Fragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initRecyclerView()
         bindUI()
     }
 
@@ -57,6 +61,9 @@ class FutureWeatherFragment : Fragment(), KodeinAware {
         return object : DisposableObserver<FutureDailyWeatherResponse>() {
             override fun onNext(weatherResponse: FutureDailyWeatherResponse) {
                 //
+                mWeatherList.clear()
+                mWeatherList.addAll(weatherResponse.list)
+                mWeatherAdapter.notifyDataSetChanged()
             }
 
             override fun onError(e: Throwable) {
@@ -66,5 +73,11 @@ class FutureWeatherFragment : Fragment(), KodeinAware {
             override fun onComplete() {
             }
         }
+    }
+
+    private fun initRecyclerView() {
+        SetUpLayoutManager.horizontalLinearLayout(requireContext(), rv_future_weather)
+        mWeatherAdapter = FutureDailyWeatherItem(mWeatherList)
+        rv_future_weather.adapter = mWeatherAdapter
     }
 }
