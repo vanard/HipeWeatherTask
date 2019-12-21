@@ -3,18 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/navigation_dashboard">
+    app:startDestination="@id/nav_current_forecast">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/nav_future_forecast"
         android:name="com.vanard.hipeweathertask.ui.future.FutureWeatherFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_future_forecast"
         tools:layout="@layout/fragment_future_weather" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/nav_current_forecast"
         android:name="com.vanard.hipeweathertask.ui.current.CurrentWeatherFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_current_weather" />
+        android:label="@string/title_current_forecast"
+        tools:layout="@layout/fragment_current_weather" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_home"
+            app:destination="@id/nav_future_forecast" />
+    </fragment>
 
 </navigation>

@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">HipeWeatherTask</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_future_forecast">Future Forecast</string>
+    <string name="title_current_forecast">Current Forecast</string>
 </resources>
