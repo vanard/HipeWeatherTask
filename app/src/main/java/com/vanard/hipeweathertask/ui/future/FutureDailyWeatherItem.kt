@@ -13,7 +13,6 @@ import com.vanard.hipeweathertask.network.BASE_IMAGE_URL
 import kotlinx.android.synthetic.main.item_future_weather.view.*
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
 class FutureDailyWeatherItem(private val weatherList: ArrayList<X>) : RecyclerView.Adapter<FutureDailyWeatherItem.WeatherViewHolder>() {
@@ -26,7 +25,7 @@ class FutureDailyWeatherItem(private val weatherList: ArrayList<X>) : RecyclerVi
         private val weatherIcon: AppCompatImageView = itemView.future_icon
 
         fun bindItems(weather: X) {
-            val date = Date(weather.dt.toLong())
+            val date = Date(weather.dt.toLong()*1000)
             val day = SimpleDateFormat("EE", Locale.getDefault()).format(date)
             val url = BASE_IMAGE_URL + weather.weather[0].icon + ".png"
             Glide.with(itemView.context).load(url)

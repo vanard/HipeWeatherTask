@@ -5,20 +5,20 @@ import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.bumptech.glide.Glide
 import com.vanard.hipeweathertask.R
 import com.vanard.hipeweathertask.data.model.current.CurrentWeatherResponse
 import com.vanard.hipeweathertask.data.model.hourly.FutureHourlyWeatherResponse
 import com.vanard.hipeweathertask.network.BASE_IMAGE_URL
-import com.vanard.hipeweathertask.ui.future.FutureDailyWeatherItem
 import com.vanard.hipeweathertask.utils.SetUpLayoutManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_current_weather.*
-import kotlinx.android.synthetic.main.fragment_future_weather.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -127,6 +127,7 @@ class CurrentWeatherFragment : Fragment(), KodeinAware {
     private fun initRecyclerView() {
         SetUpLayoutManager.horizontalLinearLayout(requireContext(), rv_current_weather)
         mWeatherAdapter = CurrentWeatherItem()
+        rv_current_weather.addItemDecoration(DividerItemDecoration(requireContext(), LinearLayout.HORIZONTAL))
         rv_current_weather.adapter = mWeatherAdapter
     }
 

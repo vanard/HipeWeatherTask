@@ -26,8 +26,8 @@ class CurrentWeatherItem() : RecyclerView.Adapter<CurrentWeatherItem.WeatherView
         private val weatherIcon: AppCompatImageView = itemView.weather_item_icon
 
         fun bindItems(weather: X) {
-            val date = Date(weather.dt.toLong())
-            val day = SimpleDateFormat("EE", Locale.getDefault()).format(date)
+            val date = Date(weather.dt.toLong()*1000)
+            val day = SimpleDateFormat("EE HH:mm", Locale.getDefault()).format(date)
             val url = BASE_IMAGE_URL + weather.weather[0].icon + ".png"
             Glide.with(itemView.context).load(url)
                 .into(weatherIcon)
